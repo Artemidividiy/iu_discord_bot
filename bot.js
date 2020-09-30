@@ -17,26 +17,27 @@ client.on('message', msg =>{
     let r3 = msg.guild.roles.cache.find(r => r.name === '3 группа');
     let r4 = msg.guild.roles.cache.find(r => r.name === '4 группа');
     let r5 = msg.guild.roles.cache.find(r => r.name === '5 группа');
-
-    if(msg.content === "1"){
-        msg.member.roles.add(r1).catch(console.error);
-        msg.delete();
-    }
-    if(msg.content === "2"){
-        msg.member.roles.add(r2).catch(console.error);
-        msg.delete();
-    }
-    if(msg.content === "3"){
-        msg.member.roles.add(r3).catch(console.error);
-        msg.delete();
-    }
-    if(msg.content === "4"){
-        msg.member.roles.add(r4).catch(console.error);
-        msg.delete();
-    }
-    if(msg.content === "5"){
-        msg.member.roles.add(r5).catch(console.error);
-        msg.delete();
+    if(msg.channel.name === 'получение-ролей'){
+        if(msg.content === "1"){
+            msg.member.roles.add(r1).catch(console.error);
+            msg.delete();
+        }
+        if(msg.content === "2"){
+            msg.member.roles.add(r2).catch(console.error);
+            msg.delete();
+        }
+        if(msg.content === "3"){
+            msg.member.roles.add(r3).catch(console.error);
+            msg.delete();
+        }
+        if(msg.content === "4"){
+            msg.member.roles.add(r4).catch(console.error);
+            msg.delete();
+        }
+        if(msg.content === "5"){
+            msg.member.roles.add(r5).catch(console.error);
+            msg.delete();
+        }
     }
 })
 
