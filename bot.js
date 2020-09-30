@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-token = "NzU4MzUxNzgxMTE3NDI3NzIz.X2tsIg.QacRRWcUhPDqAaAHqzJwIvtS-Bo"
-
+token = "NzU4MzUxNzgxMTE3NDI3NzIz.X2tsIg.qv3QgCJ0IhHkjW6Gl0rx32Se790"
 client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
