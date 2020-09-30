@@ -51,7 +51,7 @@ client.on('guildMemberAdd', member =>{
     const dmMessage = member.send(embed); 
 });
 
-client.login(process.env.token);
+client.login(process.env.BOT_TOKEN);
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
