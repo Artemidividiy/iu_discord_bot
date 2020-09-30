@@ -38,6 +38,7 @@ client.on('message', msg =>{
             msg.member.roles.add(r5).catch(console.error);
             msg.delete();
         }
+        console.log(`${msg.author}'s chosen ${msg.content}`);
     }
 })
 
