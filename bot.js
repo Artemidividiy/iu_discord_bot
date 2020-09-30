@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-token = "NzU4MzUxNzgxMTE3NDI3NzIz.X2tsIg.qv3QgCJ0IhHkjW6Gl0rx32Se790"
+// token = "NzU4MzUxNzgxMTE3NDI3NzIz.X2tsIg.qv3QgCJ0IhHkjW6Gl0rx32Se790"
 client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
@@ -51,7 +51,7 @@ client.on('guildMemberAdd', member =>{
     const dmMessage = member.send(embed); 
 });
 
-client.login(token);
+client.login(process.env.token);
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
