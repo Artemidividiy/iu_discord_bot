@@ -42,7 +42,7 @@ client.on('message', msg =>{
     if(msg.content.split(" ")[0] === "dice"){
         console.log("dice command");
         const embed = new Discord.MessageEmbed();
-        msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFF).setTitle("Dice roll").setDescription(`the result is: ${Math.round(Math.random() * 100 / msg.content.split(" ")[1])}`);
+        msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFF).setTitle("Dice roll").setDescription(`the result is: ${Math.round(Math.random() * 100 / msg.content.split(" ")[1])}`));
     }
 })
 
