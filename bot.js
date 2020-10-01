@@ -7,11 +7,9 @@ client.on('ready', () => {
 })
 
 client.on('message', msg =>{
-    if(msg.content === 'ping') msg.reply('bong!');
-
-    //Добавление роли
-    console.log(typeof(msg.content));
-    // console.log(show(msg.guild.roles.cache.array()))
+    //TODO: бонк!
+    if(msg.content === 'ping') msg.reply('bonk!');
+    //TODO: роли
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
     let r3 = msg.guild.roles.cache.find(r => r.name === '3 группа');
@@ -39,6 +37,12 @@ client.on('message', msg =>{
             msg.delete();
         }
         console.log(`${msg.author}'s chosen ${msg.content}`);
+    }
+
+    if(msg.content.split(" ")[0] === "dice"){
+        console.log("dice command");
+        const embed = new Discord.MessageEmbed();
+        msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFF).setTitle("Dice roll").setDescription(`the result is: ${Math.round(Math.random() * 100 / msg.content.split(" ")[1])})
     }
 })
 
