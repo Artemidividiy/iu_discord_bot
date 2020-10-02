@@ -1,9 +1,12 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
+
 // token = "NzU4MzUxNzgxMTE3NDI3NzIz.X2tsIg.qv3QgCJ0IhHkjW6Gl0rx32Se790"
 client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
+    schedule('16:47', Gubar); // вкл Губарь 
+    schedule('17:17', Gubar_off); // откл Губарь
 })
 
 client.on('message', msg =>{
@@ -56,6 +59,46 @@ client.on('guildMemberAdd', member =>{
     const embed = new Discord.MessageEmbed().setTitle('welcome').setDiscription(discription()).setColor(0xAE2C4C);
     const dmMessage = member.send(embed); 
 });
+
+
+function schedule(time, trigger) {
+    const hour = Number(time.split(':')[0]);
+    const minute = Number(time.split(':')[1]);
+    const startTime = new Date(); startTime.setHours(hour, minute);
+    const now = new Date();
+    if (startTime.getTime() < now.getTime()) {
+        startTime.setHours(startTime.getHours() + 24);
+    }
+    const firstTriggerAfterMs = startTime.getTime() - now.getTime();
+    setTimeout(function() {
+        trigger();
+        setInterval(trigger, 2 * 24 * 60 * 60 * 1000);
+    }, firstTriggerAfterMs);
+}
+
+function Gubar() {
+    client.guilds.cache.forEach((guild, snflk) => {
+        let current = guild.members.cache.array()[Math.floor(Math.random() * guild.members.cache.size)];
+        // оповещение
+        for (let channel of guild.channels.cache.array()) {
+          if (channel.type === 'text') {
+            channel.send('[Губарь]> Молодой человек/девушка в белом, <@' + 
+                current + '>, для вас лекция окончена, вставайте и уходите нахуй из аудитории!\nВы сможете читать и писать сообщения через полтора часа.');
+            break;
+          }
+        }
+        // присвоить роль
+        let role = guild.roles.cache.array().find(role => role.name === 'Выгнанный с лекции');
+        current.roles.add(role);
+      });
+}
+
+
+function Gubar_off() {
+    // удалить роль
+    let role = guild.roles.cache.array().find(role => role.name === 'Выгнанный с лекции');
+    role.members.first().roles.remove(role);
+}
 
 client.login(process.env.BOT_TOKEN);
 
