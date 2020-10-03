@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
 
-// token = "NzU4MzUxNzgxMTE3NDI3NzIz.X2tsIg.qv3QgCJ0IhHkjW6Gl0rx32Se790"
 client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
@@ -10,9 +9,7 @@ client.on('ready', () => {
 })
 
 client.on('message', msg =>{
-    //TODO: бонк!
     if(msg.content === 'ping') msg.reply('bonk!');
-    //TODO: роли
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
     let r3 = msg.guild.roles.cache.find(r => r.name === '3 группа');
