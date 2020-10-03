@@ -103,3 +103,7 @@ client.login(process.env.BOT_TOKEN);
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
 }
+
+function dice(n) {
+    return Math.floor(Math.random() * n) + 1;
+}
