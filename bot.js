@@ -90,11 +90,12 @@ function Gubar() {
       });
 }
 
-
 function Gubar_off() {
+    client.guilds.cache.forEach((guild, snflk) => {
     // удалить роль
-    let role = guild.roles.cache.array().find(role => role.name === 'Выгнанный с лекции');
-    role.members.first().roles.remove(role);
+        let role = guild.roles.cache.array().find(role => role.name === 'Выгнанный с лекции');
+        role.members.first().roles.remove(role);
+    });
 }
 
 client.login(process.env.BOT_TOKEN);
