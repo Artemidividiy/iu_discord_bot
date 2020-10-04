@@ -5,7 +5,7 @@ client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
     schedule('16:47', Gubar); // вкл Губарь 
-    schedule('17:17', Gubar_off); // откл Губарь
+    schedule('18:17', Gubar_off); // откл Губарь
 })
 
 client.on('message', msg =>{
