@@ -37,6 +37,7 @@ client.on('message', msg =>{
             msg.delete();
         }
         console.log(`${msg.author}'s chosen ${msg.content}`);
+        console.log(msg.content);
     }
 
     if(msg.content.split(" ")[0] === "dice"){
@@ -69,7 +70,7 @@ function schedule(time, trigger) {
     const firstTriggerAfterMs = startTime.getTime() - now.getTime();
     setTimeout(function() {
         trigger();
-        setInterval(trigger, 2 * 24 * 60 * 60 * 1000);
+        setInterval(trigger, 24 * 60 * 60 * 1000);
     }, firstTriggerAfterMs);
 }
 
@@ -98,7 +99,7 @@ function Gubar_off() {
     });
 }
 
-client.login(process.env.BOT_TOKEN);
+client.login('');
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
