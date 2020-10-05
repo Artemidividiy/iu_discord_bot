@@ -99,7 +99,7 @@ function Gubar_off() {
     });
 }
 
-client.login('');
+client.login(process.env.BOT_TOKEN);
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
