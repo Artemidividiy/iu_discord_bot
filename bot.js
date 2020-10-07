@@ -106,14 +106,6 @@ function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
 }
 
-//TODO: прописать логгер через питон и фласк
-function logger(){
-    if filecontent == null{
-            fs.create()
-    }
-    
-}
-
 function dice(n) {
     return Math.floor(Math.random() * n) + 1;
 }
