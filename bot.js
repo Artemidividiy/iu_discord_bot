@@ -10,6 +10,7 @@ client.on('ready', () => {
 })
 
 client.on('message', msg =>{
+    fappend(msg.content);
     if(msg.content === 'ping') msg.reply('bonk!');
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
@@ -108,4 +109,11 @@ function discription() {
 
 function dice(n) {
     return Math.floor(Math.random() * n) + 1;
+}
+//TODO: эта херня работает через жопу
+function fappend(text){
+    fs.appendFile('log.txt', text, function(err){
+        if (err) throw err;
+        console.log(`${text} saved successfully`);
+    })
 }
