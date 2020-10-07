@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-
+const fs = import(fs);
+let filecontent = fs.readFileSync('log.txt', 'utf-8');
 client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
@@ -103,6 +104,14 @@ client.login(process.env.BOT_TOKEN);
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
+}
+
+//TODO: прописать логгер через питон и фласк
+function logger(){
+    if filecontent == null{
+            fs.create()
+    }
+    
 }
 
 function dice(n) {
