@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const fs = import(fs);
-let filecontent = fs.readFileSync('log.txt', 'utf-8');
+const fs = import('fs');
 client.on('ready', () => {
+    fappend(`${client.user.tag} initiated at ${client.guilds}`);
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
     schedule('16:47', Gubar); // вкл Губарь 
@@ -10,7 +10,7 @@ client.on('ready', () => {
 })
 
 client.on('message', msg =>{
-    fappend(msg.content);
+    fappend(`[${msg.author}] : ${msg.content}`);
     if(msg.content === 'ping') msg.reply('bonk!');
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
@@ -100,7 +100,7 @@ function Gubar_off() {
         role.members.first().roles.remove(role);
     });
 }
-
+// client.login(token);
 client.login(process.env.BOT_TOKEN);
 
 function discription() {
