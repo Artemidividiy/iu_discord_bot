@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const fs = import(fs);
-let filecontent = fs.readFileSync('log.txt', 'utf-8');
+const fs = import('fs');
 client.on('ready', () => {
     console.log("bot is ready");
     console.log(`initialized as ${client.user.tag}`);
