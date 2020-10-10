@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = import("fs");
 
-var stream = fs.createWriteStream('log.txt', {flags: sflag});
+var stream = fs.createWriteStream('log.txt', {flags: 'sflag'});
 client.on("ready", () => {
   fappend(`${client.user.tag} initiated at ${client.guilds}`);
   console.log("bot is ready");
