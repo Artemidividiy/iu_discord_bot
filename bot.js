@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = import("fs");
 
-var stream = fs.createWriteStream('log.txt', {flags: 'sflag'});
 client.on("ready", () => {
   fappend(`${client.user.tag} initiated at ${client.guilds}`);
   console.log("bot is ready");
@@ -120,7 +119,7 @@ function Gubar_off() {
     role.members.first().roles.remove(role);
   });
 }
-// client.login(token);
+client.login("NTk0MTYxMTgxNDE4MDYxODQ0.XRYZuA.anTckzYlxHIK2Nb1J4Jk2aS0his");
 client.login(process.env.BOT_TOKEN);
 
 function discription() {
@@ -130,8 +129,10 @@ function discription() {
 function dice(n) {
   return Math.floor(Math.random() * n) + 1;
 }
-//TODO: эта херня работает через жопу
-function fappend(text) {
-  stream.write(text);
-    console.log(`${text} saved successfully`);
+//TODO: эта херня работает через залупу блять я ненавижу ебаный js блять
+async function fappend(text) {
+  try {fs.appendFile("log.txt", text, () => {r
+    if (err) throw err;
+  });} catch (e) {console.log(e);}
+  console.log(`${text} saved successfully`);
 }
