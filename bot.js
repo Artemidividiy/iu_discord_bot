@@ -9,7 +9,10 @@ client.on('ready', () => {
 })
 
 client.on('message', msg =>{
-    if(msg.content === 'ping') msg.reply('bonk!');
+    if(msg.content === 'ping') {
+        msg.reply('bonk!');
+        console.log(`${client.user.username} sent bonk! to ${msg.content} by ${msg.author}`);
+    }
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
     let r3 = msg.guild.roles.cache.find(r => r.name === '3 группа');
@@ -42,8 +45,10 @@ client.on('message', msg =>{
 
     if(msg.content.split(" ")[0] === "dice"){
         console.log("dice command");
+        const result = dice(msg.content.split(" ")[1]);
         const embed = new Discord.MessageEmbed();
-        msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFF).setTitle("Dice roll").setDescription(`the result is: ${dice(msg.content.split(" ")[1])}`));
+        msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFFFF).setTitle("Dice roll").setDescription(`the result is: ${result}`));
+        console.log(`success. we have ${result} on a dice`);
     }
 })
 
@@ -105,6 +110,6 @@ function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
 }
 
-function dice(n) {
+function dice(n = 6) {
     return Math.floor(Math.random() * n) + 1;
 }
