@@ -57,7 +57,7 @@ client.on("message", (msg) => {
     ); 
   } 
   if (msg.content.split(" ")[0] === "calculate") {
-        calculate(msg.content, client);
+        msg.reply(calculate(msg.content, client));
     }
 });
 
@@ -134,13 +134,17 @@ function discription() {
 function calculate(data, client){
     console.log(data);
     var a = data.split(" ");
+    console.log(a);
     var string = "";
-    for (let index = 0; index < data.length; index++) {
-        string += data[index] + "+";
+    for (let index = 0; index < a.length; index++) {
+        string += a[index] + "+";
     }
+    var string1 = string.slice(0, string.length - 1);
     console.log(string);
     const embed = new Discord.MessageEmbed();
-    return embed.setImage(`http://api.wolframalpha.com/v1/simple?appid=${waApi}i=${string}%3F`).setAuthor(client.user.username);
+    var url = `http://api.wolframalpha.com/v1/simple?appid=${waApi}i=${string1}%3F`;
+    console.log(url);
+    return embed.setImage(`http://api.wolframalpha.com/v1/simple?appid=${waApi}&i=${string1}%3F`).setAuthor(client.user.username + client.user.username);
 }
 
 function dice(n) {
