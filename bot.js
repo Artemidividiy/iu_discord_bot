@@ -119,7 +119,7 @@ function Gubar_off() {
   client.guilds.cache.forEach((guild, snflk) => {
     // удалить роль
     let role = guild.roles.cache
-      .array()
+      .array()  
       .find((role) => role.name === "Выгнанный с лекции");
     role.members.first().roles.remove(role);
   });
@@ -143,7 +143,7 @@ function calculate(data, client){
     const embed = new Discord.MessageEmbed();
     var url = `http://api.wolframalpha.com/v1/simple?appid=${waApi}i=${string1}%3F`;
     console.log(url);
-    return embed.setImage(`http://api.wolframalpha.com/v1/simple?appid=${waApi}&i=${string1}%3F`).setAuthor(client.user.username + client.user.username);
+    return embed.setImage(url).setAuthor(client.user.username + client.user.id);
 }
 
 function dice(n) {
