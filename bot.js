@@ -124,8 +124,7 @@ function Gubar_off() {
     role.members.first().roles.remove(role);
   });
 }
-client.login("NTk0MTYxMTgxNDE4MDYxODQ0.XRYZuA.anTckzYlxHIK2Nb1J4Jk2aS0his");
-// client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
 
 function discription() {
   return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
