@@ -1,9 +1,15 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const fs = import('fs');
+const fs = require('fs');
+
+function log(data) {
+    fs.appendFile('log.txt', '[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] ' + data + '\n', function (err) {
+        if (err) throw err;
+    });
+};
+
 client.on('ready', () => {
-    console.log("bot is ready");
-    console.log(`initialized as ${client.user.tag}`);
+    log(`initialized as ${client.user.tag}`), 
     schedule('16:47', Gubar); // вкл Губарь 
     schedule('18:17', Gubar_off); // откл Губарь
 })
@@ -11,7 +17,7 @@ client.on('ready', () => {
 client.on('message', msg =>{
     if(msg.content === 'ping') {
         msg.reply('bonk!');
-        console.log(`${client.user.username} sent bonk! to ${msg.content} by ${msg.author}`);
+        log(`${client.user.username} sent bonk! to ${msg.content} by ${msg.author}`);
     }
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
@@ -39,30 +45,23 @@ client.on('message', msg =>{
             msg.member.roles.add(r5).catch(console.error);
             msg.delete();
         }
-        console.log(`${msg.author}'s chosen ${msg.content}`);
-        console.log(msg.content);
+        log(`${msg.author}'s chosen ${msg.content}`);
+        log(msg.content);
     }
 
     if(msg.content.split(" ")[0] === "dice"){
-        console.log("dice command");
+
         const result = dice(msg.content.split(" ")[1]);
         const embed = new Discord.MessageEmbed();
         msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFFFF).setTitle("Dice roll").setDescription(`the result is: ${result}`));
-        console.log(`success. we have ${result} on a dice`);
+        log(`success. we have ${result} on a dice`);
     }
-})
-
-function show(arr) {
-        for(var i = 0; i < arr.length; i++) {
-            console.log(arr[i]);
-        }
-}
+});
 
 client.on('guildMemberAdd', member =>{
     const embed = new Discord.MessageEmbed().setTitle('welcome').setDiscription(discription()).setColor(0xAE2C4C);
     const dmMessage = member.send(embed); 
 });
-
 
 function schedule(time, trigger) {
     const hour = Number(time.split(':')[0]);
@@ -104,7 +103,9 @@ function Gubar_off() {
     });
 }
 
-client.login(process.env.BOT_TOKEN);
+client.login('Njk4ODQ5MDE1MDIxNjk5MDgy.XpL0Ng.0ey8Id4uAx_NmSeJQQq23ezCSSE');
+
+//client.login(process.env.BOT_TOKEN);
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
