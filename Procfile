@@ -1,2 +1,2 @@
-web: flask run
+web: gunicorn app:app
 worker: node bot.js
