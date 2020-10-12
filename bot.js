@@ -1,9 +1,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const fs = import("fs");
-
+const fs = require("fs");
+const waApi = "56389J-H997PXPK83";
+//токен для работы вольфрама на хероку
+// const waApi = WolframAlpha(process.env.WATOKEN);
 client.on("ready", () => {
-  fappend(`${client.user.tag} initiated at ${client.guilds}`);
+//   fappend(`${client.user.tag} initiated at ${client.guilds}`);
   console.log("bot is ready");
   console.log(`initialized as ${client.user.tag}`);
   schedule("16:47", Gubar); // вкл Губарь
@@ -11,7 +13,7 @@ client.on("ready", () => {
 });
 
 client.on("message", (msg) => {
-  fappend(`[${msg.author}] : ${msg.content}`);
+//   fappend(`[${msg.author}] : ${msg.content}`);
   if (msg.content === "ping") msg.reply("bonk!");
   let r1 = msg.guild.roles.cache.find((r) => r.name === "1 группа");
   let r2 = msg.guild.roles.cache.find((r) => r.name === "2 группа");
@@ -52,8 +54,11 @@ client.on("message", (msg) => {
         .setColor(0xffff)
         .setTitle("Dice roll")
         .setDescription(`the result is: ${dice(msg.content.split(" ")[1])}`)
-    );
-  }
+    ); 
+  } 
+  if (msg.content.split(" ")[0] === "calculate") {
+        calculate(msg.content, client);
+    }
 });
 
 function show(arr) {
@@ -120,19 +125,31 @@ function Gubar_off() {
   });
 }
 client.login("NTk0MTYxMTgxNDE4MDYxODQ0.XRYZuA.anTckzYlxHIK2Nb1J4Jk2aS0his");
-client.login(process.env.BOT_TOKEN);
+// client.login(process.env.BOT_TOKEN);
 
 function discription() {
   return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
+}
+
+function calculate(data, client){
+    console.log(data);
+    var a = data.split(" ");
+    var string = "";
+    for (let index = 0; index < data.length; index++) {
+        string += data[index] + "+";
+    }
+    console.log(string);
+    const embed = new Discord.MessageEmbed();
+    return embed.setImage(`http://api.wolframalpha.com/v1/simple?appid=${waApi}i=${string}%3F`).setAuthor(client.user.username);
 }
 
 function dice(n) {
   return Math.floor(Math.random() * n) + 1;
 }
 //TODO: эта херня работает через залупу блять я ненавижу ебаный js блять
-async function fappend(text) {
-  try {fs.appendFile("log.txt", text, () => {r
-    if (err) throw err;
-  });} catch (e) {console.log(e);}
-  console.log(`${text} saved successfully`);
-}
+// async function fappend(text) {
+//   try {fs.appendFile("log.txt", text, () => {r
+//     if (err) throw err;
+//   });} catch (e) {console.log(e);}
+//   console.log(`${text} saved successfully`);
+// }
