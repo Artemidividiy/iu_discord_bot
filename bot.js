@@ -1,15 +1,17 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-const waApi = "56389J-H997PXPK83";
 //токен для работы вольфрама на хероку
+// const waAPI = WolframAlphaAPI("56389J-H997PXPK83");
+const waApi = "56389J-H997PXPK83";
 // const waApi = WolframAlpha(process.env.WATOKEN);
 client.on("ready", () => {
 //   fappend(`${client.user.tag} initiated at ${client.guilds}`);
   console.log("bot is ready");
   console.log(`initialized as ${client.user.tag}`);
-  schedule("16:47", Gubar); // вкл Губарь
-  schedule("18:17", Gubar_off); // откл Губарь
+    //я отключил эту фичу для дебага
+  //   schedule("16:47", Gubar); // вкл Губарь
+//   schedule("18:17", Gubar_off); // откл Губарь
 });
 
 client.on("message", (msg) => {
@@ -124,7 +126,8 @@ function Gubar_off() {
     role.members.first().roles.remove(role);
   });
 }
-client.login(process.env.BOT_TOKEN);
+client.login('NTk0MTYxMTgxNDE4MDYxODQ0.XRYZuA.X1OnqQSOwAI_4qZkJVny5JtJBg0');
+// client.login(process.env.BOT_TOKEN);
 
 function discription() {
   return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
@@ -135,15 +138,15 @@ function calculate(data, client){
     var a = data.split(" ");
     console.log(a);
     var string = "";
-    for (let index = 0; index < a.length; index++) {
+    for (let index = 1; index < a.length; index++) {
         string += a[index] + "+";
     }
     var string1 = string.slice(0, string.length - 1);
     console.log(string);
     const embed = new Discord.MessageEmbed();
-    var url = `http://api.wolframalpha.com/v1/simple?appid=${waApi}i=${string1}%3F`;
+    var url = `http://api.wolframalpha.com/v1/simple?appid=${waApi}&i=${string1}%3F`;
     console.log(url);
-    return embed.setImage(url).setAuthor(client.user.username + client.user.id);
+    return embed.setImage(url).setAuthor(client.user.username);
 }
 
 function dice(n) {
