@@ -103,9 +103,7 @@ function Gubar_off() {
     });
 }
 
-client.login('Njk4ODQ5MDE1MDIxNjk5MDgy.XpL0Ng.0ey8Id4uAx_NmSeJQQq23ezCSSE');
-
-//client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
 
 function discription() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
