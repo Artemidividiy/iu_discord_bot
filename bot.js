@@ -167,6 +167,60 @@ function calculate(msg, client){
                 embed.setImage(plotURL).setDescription('График');
                 msg.reply(embed);
             }
+            let limObj = result.pods.filter(pod => {
+                return pod.title === 'Limit';
+            })[0];
+            if(limObj) {
+                if(limObj.plaintext === '(two-sided limit does not exist)') {
+                    console.log('Двусторонний предел не существует');
+                }
+                else {
+                    let limURL = limObj.img.src;
+                    embed.setImage(limURL).setDescription('Двусторонний предел');
+                    msg.reply(embed);
+                }
+            }
+            let llimObj = result.pods.filter(pod => {
+                return pod.title === 'Limit from the left';
+            })[0];
+            if(llimObj) {
+                let llimURL = llimObj.subpods[0].img.src;
+                embed.setImage(llimURL).setDescription('Левосторонний предел');
+                msg.reply(embed);
+            }
+            let rlimObj = result.pods.filter(pod => {
+                return pod.title === 'Limit from the right';
+            })[0];
+            if(llimObj) {
+                let rlimURL = rlimObj.subpods[0].img.src;
+                embed.setImage(rlimURL).setDescription('Правосторонний предел');
+                msg.reply(embed);
+            }
+            let dvtObj = result.pods.filter(pod => {
+                return pod.title === 'Derivative';
+            })[0];
+            if(dvtObj) {
+                let dvtURL = dvtObj.subpods[0].img.src;
+                embed.setImage(dvtURL).setDescription('Производная');
+                msg.reply(embed);
+            }
+            let indObj = result.pods.filter(pod => {
+                return pod.title === 'Derivative';
+            })[0];
+            if(indObj) {
+                let indURL = indObj.subpods[0].img.src;
+                embed.setImage(indURL).setDescription('Неопределенный интеграл');
+                msg.reply(embed);
+            }
+            let defObj = result.pods.filter(pod => {
+                return pod.title === 'Derivative';
+            })[0];
+            if(defObj) {
+                let defURL = defObj.subpods[0].img.src;
+                embed.setImage(defURL).setDescription('Определенный интеграл');
+                msg.reply(embed);
+            }
+
         }
         else {
             msg.reply('Превышено время вычисления');
