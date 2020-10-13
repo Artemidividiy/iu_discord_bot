@@ -144,7 +144,7 @@ function calculate(data, client){
     var string1 = string.slice(0, string.length - 1);
     console.log(string);
     const embed = new Discord.MessageEmbed();
-    var url = "http://api.wolframalpha.com/v1/simple?appid=" + waApi + "&i=" + string + "%3F";
+    var url = `http://api.wolframalpha.com/v1/simple?appid=${waApi}&i=${string1}%3F`;
     console.log(url);
     return embed.setImage(url).setAuthor(client.user.username);
 }
