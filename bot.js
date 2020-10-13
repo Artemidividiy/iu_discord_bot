@@ -172,7 +172,7 @@ function calculate(msg, client){
             })[0];
             if(limObj) {
                 if(limObj.plaintext === '(two-sided limit does not exist)') {
-                    console.log('Двусторонний предел не существует');
+                    msg.reply('Двусторонний предел не существует');
                 }
                 else {
                     let limURL = limObj.img.src;
@@ -191,7 +191,7 @@ function calculate(msg, client){
             let rlimObj = result.pods.filter(pod => {
                 return pod.title === 'Limit from the right';
             })[0];
-            if(llimObj) {
+            if(rlimObj) {
                 let rlimURL = rlimObj.subpods[0].img.src;
                 embed.setImage(rlimURL).setDescription('Правосторонний предел');
                 msg.reply(embed);
