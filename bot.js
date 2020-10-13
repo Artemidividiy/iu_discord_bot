@@ -127,9 +127,7 @@ function Gubar_off() {
   });
 }
 
-//client.login(process.env.BOT_TOKEN);
-
-client.login('Njk4ODQ5MDE1MDIxNjk5MDgy.XpLz3Q.KTQxON3nSkpmN9AyE2aKzlutNq0');
+client.login(process.env.BOT_TOKEN);
 
 function discription() {
   return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
@@ -149,7 +147,6 @@ function calculate(data, client){
     var url = `http://api.wolframalpha.com/v1/simple?appid=${waApi}&i=${string1}%3F`;
     console.log(url);
     return embed.setImage(url).setAuthor(client.user.username);
-    //await new Promise(r => setTimeout(r, 15000));
 }
 
 function dice(n) {
