@@ -205,7 +205,7 @@ function calculate(msg, client){
                 msg.reply(embed);
             }
             let indObj = result.pods.filter(pod => {
-                return pod.title === 'Derivative';
+                return pod.title === 'Indefinite integral';
             })[0];
             if(indObj) {
                 let indURL = indObj.subpods[0].img.src;
@@ -213,7 +213,7 @@ function calculate(msg, client){
                 msg.reply(embed);
             }
             let defObj = result.pods.filter(pod => {
-                return pod.title === 'Derivative';
+                return pod.title === 'Definite integral';
             })[0];
             if(defObj) {
                 let defURL = defObj.subpods[0].img.src;
