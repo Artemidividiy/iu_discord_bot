@@ -1,6 +1,8 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
 const fs = require('fs');
+const WolframAlphaAPI = require('wolfram-alpha-api');
+const waApi = WolframAlphaAPI(process.env.WATOKEN);
 
 function log(data) {
     fs.appendFile('log.txt', '[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] ' + data + '\n', function (err) {
@@ -56,10 +58,14 @@ client.on('message', msg =>{
         msg.reply(embed.setAuthor(client.user.username).setColor(0xFFFFFF).setTitle("Dice roll").setDescription(`the result is: ${result}`));
         log(`success. we have ${result} on a dice`);
     }
+
+    if (msg.content.split(" ")[0] === "calc") {
+        calculate(msg, client);
+    }
 });
 
 client.on('guildMemberAdd', member =>{
-    const embed = new Discord.MessageEmbed().setTitle('welcome').setDiscription(discription()).setColor(0xAE2C4C);
+    const embed = new Discord.MessageEmbed().setTitle('welcome').setDescription(description()).setColor(0xAE2C4C);
     const dmMessage = member.send(embed); 
 });
 
@@ -105,10 +111,68 @@ function Gubar_off() {
 
 client.login(process.env.BOT_TOKEN);
 
-function discription() {
+function description() {
     return 'тебе необходимо "зарегистрироваться" \n подробнее: канал "получение-ролей"';
 }
 
 function dice(n = 6) {
     return Math.floor(Math.random() * n) + 1;
+}
+
+function calculate(msg, client){
+    let data = msg.content;
+    console.log(data);
+    let a = data.split(" ");
+    console.log(a);
+    let string = "";
+    for (let index = 1; index < a.length; index++) {
+        string += a[index] + "+";
+    }
+    let expr = string.slice(0, string.length - 1);
+    waApi.getFull(expr).then(function(result) {
+        let embed = new Discord.MessageEmbed;
+        if(result.pods) {
+            let rootArray = result.pods.filter(pod => {
+                return pod.title === 'Root' 
+                || pod.title === 'Roots' 
+                || pod.title === 'Solution'
+                || pod.title === 'Solutions';
+            })[0];
+            if(rootArray) {
+                let rootNum = 1;
+                rootArray.subpods.forEach(root => {
+                    embed.setImage(root.img.src).setDescription(rootNum + '-й корень');
+                    msg.reply(embed);
+                    rootNum++;
+                })
+            }
+            let resObj = result.pods.filter(pod => {
+                return pod.title === 'Result';
+            })[0];
+            if(resObj) {
+                let resURL = resObj.subpods[0].img.src;
+                embed.setImage(resURL).setDescription('Приведение');
+                msg.reply(embed);
+            }
+            let plotObj = result.pods.filter(pod => {
+                return pod.title === 'Plot' 
+                || pod.title === 'Plots' 
+                || pod.title === 'Implicit plot' 
+                || pod.title === 'Implicit plots'
+                || pod.title === 'Root plot'
+                || pod.title === 'Root plots';
+            })[0];
+            if(plotObj) {
+                let plotURL = plotObj.subpods[0].img.src;
+                embed.setImage(plotURL).setDescription('График');
+                msg.reply(embed);
+            }
+        }
+        else {
+            msg.reply('Превышено время вычисления');
+        }
+    }, function(err) {
+        msg.reply('Что-то пошло по пизде, попробуйте еще раз');
+        log(err);
+    });
 }
