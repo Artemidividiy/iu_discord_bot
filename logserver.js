@@ -2,6 +2,12 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 
+fs.unlink('log.txt', (err) => {
+    if(err) {
+        throw err;
+    }
+    console.log('Logs cleared');
+});
 
 app.get('/', function (req, res) {
     let webpage = '<!DOCTYPE html> <head> <title>Logs</title> </head> <body> ';
