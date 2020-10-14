@@ -39,7 +39,7 @@ app.get('/deploy', function (req, res) {
         }
         console.log(`${stdout}`);
     });
-    res.send('deployed');
+    res.send('deploy request recieved');
 })
 
 app.listen(80);
