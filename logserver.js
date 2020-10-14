@@ -1,9 +1,9 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const exec = require('child_process').exec, child;
+const exec = require('child_process').exec;
 
-deploy = exec('git pull origin master',
+const deploy = exec('git pull origin master',
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
