@@ -126,7 +126,7 @@ function calculate(msg, client){
     console.log(a);
     let string = "";
     for (let index = 1; index < a.length; index++) {
-        string += a[index] + "+";
+        string += a[index] + " ";
     }
     let expr = string.slice(0, string.length - 1);
     waApi.getFull(expr).then(function(result) {
