@@ -1,17 +1,19 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const exec = require('child_process').exec;
+const { exec } = require("child_process");
 
-const deploy = exec('git pull origin master',
-    function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
+exec("git pull origin master", (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
 });
-
 app.get('/log', function (req, res) {
     let webpage = '<!DOCTYPE html> <head> <title>Logs</title> </head> <body> ';
     fs.readFile('logs.txt', 'utf-8', function (err, data) {
@@ -26,7 +28,18 @@ app.get('/log', function (req, res) {
 })
 
 app.get('/deploy', function (req, res) {
-    deploy();
+    exec("git pull origin master", (error, stdout, stderr) => {
+        if (error) {
+            console.log(`${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`${stderr}`);
+            return;
+        }
+        console.log(`${stdout}`);
+    });
+    res.send('deployed');
 })
 
 app.listen(8080);
