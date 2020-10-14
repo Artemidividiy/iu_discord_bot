@@ -5,7 +5,7 @@ const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(process.env.WATOKEN);
 
 function log(data) {
-    fs.appendFile('log.txt', '[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] ' + data + '\n', function (err) {
+    fs.appendFile('logs.txt', '[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] ' + data + '\n', function (err) {
         if (err) throw err;
     });
 };
