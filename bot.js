@@ -221,6 +221,14 @@ function calculate(msg, client){
                 embed.setImage(defURL).setDescription('Определенный интеграл');
                 msg.reply(embed);
             }            
+            let ttObj = result.pods.filter(pod => {
+                return pod.title === 'Truth table';
+            })[0];
+            if(ttObj) {
+                let ttURL = ttObj.subpods[0].img.src;
+                embed.setImage(ttURL).setDescription('Таблица истинности');
+                msg.reply(embed);
+            }
             let eqObj = result.pods.filter(pod => {
                 return pod.title === 'Equation';
             })[0];
