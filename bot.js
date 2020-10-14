@@ -220,8 +220,24 @@ function calculate(msg, client){
                 let defURL = defObj.subpods[0].img.src;
                 embed.setImage(defURL).setDescription('Определенный интеграл');
                 msg.reply(embed);
+            }            
+            let eqObj = result.pods.filter(pod => {
+                return pod.title === 'Equation';
+            })[0];
+            if(eqObj) {
+                let eqURL = eqObj.subpods[0].img.src;
+                embed.setImage(eqURL).setDescription('Уравнение');
+                msg.reply(embed);
             }
-
+            let schObj = result.pods.filter(pod => {
+                return pod.title === 'Schematic'
+                || pod.title === 'Schematics';
+            })[0];
+            if(schObj) {
+                let schURL = schObj.subpods[0].img.src;
+                embed.setImage(schURL).setDescription('Схема');
+                msg.reply(embed);
+            }
         }
         else {
             msg.reply('Превышено время вычисления');
