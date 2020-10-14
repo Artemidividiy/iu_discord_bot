@@ -42,4 +42,4 @@ app.get('/deploy', function (req, res) {
     res.send('deployed');
 })
 
-app.listen(8080);
+app.listen(80);
