@@ -12,7 +12,6 @@ deploy = exec('git pull origin master',
         }
 });
 
-
 app.get('/log', function (req, res) {
     let webpage = '<!DOCTYPE html> <head> <title>Logs</title> </head> <body> ';
     fs.readFile('logs.txt', 'utf-8', function (err, data) {
@@ -30,4 +29,4 @@ app.get('/deploy', function (req, res) {
     deploy();
 })
 
-app.listen(process.env.PORT);
+app.listen(8080);
