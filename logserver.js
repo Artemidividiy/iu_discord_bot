@@ -32,12 +32,12 @@ app.get('/clear', function (req, res) {
 })
 
 app.get('/deploy', function (req, res) {
+    log('new version deployed');
     exec("git pull origin master", (error, stdout, stderr) => {
         if (error) {
             console.log(`${error.message}`);
             return;
         }
-        log('new version deployed');
         if (stderr) {
             console.log(`${stderr}`);
             return;
