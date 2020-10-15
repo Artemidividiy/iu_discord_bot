@@ -19,7 +19,7 @@ client.on('ready', () => {
 client.on('message', msg =>{
     if(msg.content === 'ping') {
         msg.reply('bonk!');
-        log(`${client.user.username} sent bonk! to ${msg.content} by ${msg.author}`);
+        log(`${client.user.username} sent bonk! to ${msg.content} by ${msg.author.username}`);
     }
     let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
     let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
@@ -47,7 +47,7 @@ client.on('message', msg =>{
             msg.member.roles.add(r5).catch(console.error);
             msg.delete();
         }
-        log(`${msg.author}'s chosen ${msg.content}`);
+        log(`${msg.author.username}'s chosen ${msg.content}`);
         log(msg.content);
     }
 
