@@ -255,3 +255,8 @@ function calculate(msg, client){
         log(err);
     });
 }
+
+process.on('uncaughtException', function (err) {
+    log(err);
+});
+  
