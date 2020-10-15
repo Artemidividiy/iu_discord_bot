@@ -4,16 +4,14 @@ const app = express();
 const { exec } = require("child_process");
 
 function log(data) {
-    fs.appendFile('logs.txt', '[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] ' + data + '\n', function (err) {
-        if (err) throw err;
-    });
+    console.log('[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] (server) >' + data + '\n');
 };
 
 app.get('/log', function (req, res) {
     let webpage = '<!DOCTYPE html> <head> <title>Logs</title> </head> <body> ';
-    fs.readFile('logs.txt', 'utf8', function (err, data) {
+    fs.readFile('clog.txt', 'utf8', function (err, data) {
         if (err) {
-          return console.log(err);
+          return log(err);
         }
         data.split('\n').forEach(line => {
             webpage += line + ' <br> ';
@@ -25,7 +23,7 @@ app.get('/log', function (req, res) {
 app.get('/clear', function (req, res) {
     fs.writeFile('logs.txt', '', function (err, data) {
         if (err) {
-          return console.log(err);
+          return log(err);
         }
         res.send('logs cleared');
     });
@@ -35,14 +33,14 @@ app.get('/deploy', function (req, res) {
     log('new version deployed');
     exec("git pull origin master", (error, stdout, stderr) => {
         if (error) {
-            console.log(`${error.message}`);
+            log(`${error.message}`);
             return;
         }
         if (stderr) {
-            console.log(`${stderr}`);
+            log(`${stderr}`);
             return;
         }
-        console.log(`${stdout}`);
+        log(`${stdout}`);
     });
     res.send('deploy request recieved');
 })

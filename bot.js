@@ -5,9 +5,7 @@ const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(process.env.WATOKEN);
 
 function log(data) {
-    fs.appendFile('logs.txt', '[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] ' + data + '\n', function (err) {
-        if (err) throw err;
-    });
+    console.log('[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] (bot) >' + data + '\n');
 };
 
 client.on('ready', () => {
@@ -16,17 +14,17 @@ client.on('ready', () => {
     schedule('21:17', Gubar_off); // откл Губарь
 })
 
-client.on('message', msg =>{
+client.on('message', msg => {
     if(msg.content === 'ping') {
         msg.reply('bonk!');
         log(`${client.user.username} sent bonk! to ${msg.content} by ${msg.author.username}`);
     }
-    let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
-    let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
-    let r3 = msg.guild.roles.cache.find(r => r.name === '3 группа');
-    let r4 = msg.guild.roles.cache.find(r => r.name === '4 группа');
-    let r5 = msg.guild.roles.cache.find(r => r.name === '5 группа');
     if(msg.channel.name === 'получение-ролей'){
+        let r1 = msg.guild.roles.cache.find(r => r.name === '1 группа');
+        let r2 = msg.guild.roles.cache.find(r => r.name === '2 группа');
+        let r3 = msg.guild.roles.cache.find(r => r.name === '3 группа');
+        let r4 = msg.guild.roles.cache.find(r => r.name === '4 группа');
+        let r5 = msg.guild.roles.cache.find(r => r.name === '5 группа');
         if(msg.content === "1"){
             msg.member.roles.add(r1).catch(console.error);
             msg.delete();
@@ -255,8 +253,4 @@ function calculate(msg, client){
         log(err);
     });
 }
-
-process.on('uncaughtException', function (err) {
-    log(err);
-});
   
