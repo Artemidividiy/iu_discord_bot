@@ -12,8 +12,8 @@ function log(data) {
 
 client.on('ready', () => {
     log(`initialized as ${client.user.tag}`), 
-    schedule('16:47', Gubar); // вкл Губарь 
-    schedule('18:17', Gubar_off); // откл Губарь
+    schedule('19:47', Gubar); // вкл Губарь 
+    schedule('21:17', Gubar_off); // откл Губарь
 })
 
 client.on('message', msg =>{
