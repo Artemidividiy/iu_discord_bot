@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const fs = require('fs');
 const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(process.env.WATOKEN);
+const child_process = require('child_process');
 
 function log(data) {
     console.log('[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] (bot) >' + data + '\n');
@@ -59,6 +60,16 @@ client.on('message', msg => {
 
     if (msg.content.split(" ")[0] === "calc") {
         calculate(msg, client);
+    }
+
+    if (msg.content.split(" ")[0] === "fc") {
+        let nfiles = fs.readdirSync('../in/').length;
+        child_process.execSync('curl ' + msg.attachments.array()[0].url + ' -o ../in/' + nfiles + '.pas');
+        console.log('curl ' + msg.attachments.array()[0].url + ' -o ../in/' + nfiles + '.pas');
+        let nout = fs.readdirSync('../out/').length;
+        child_process.execSync('cd ../autoflowchart && node main.js ../in/' + nfiles + '.pas ../out/' + nout + '.png');
+        const embed = new Discord.MessageEmbed();
+        msg.reply(embed.setImage('http://95.165.106.101:8080/' + nout + '.png'));
     }
 });
 
