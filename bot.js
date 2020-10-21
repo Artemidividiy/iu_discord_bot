@@ -69,6 +69,7 @@ client.on('message', msg => {
         let nout = fs.readdirSync('../out/').length;
         child_process.execSync('cd ../autoflowchart && node main.js ../in/' + nfiles + '.pas ../out/' + nout + '.png');
         const embed = new Discord.MessageEmbed();
+        console.log('http://95.165.106.101:8080/' + nout + '.png');
         msg.reply(embed.setImage('http://95.165.106.101:8080/' + nout + '.png'));
     }
 });
