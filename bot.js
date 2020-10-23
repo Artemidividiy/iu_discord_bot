@@ -84,7 +84,7 @@ client.on('message', msg => {
             child_process.execSync(execstr);
         }
         catch(error) {
-            msg.reply('неверные входные данные');
+            msg.reply('Неверные входные данные.\nФормат ввода:\n\`diary\nФИО\nДата рождения\nГруппа\nВес\nРост\nДата начала занятий\nДата конца занятий\nЗанятие каждые (N) дней\`\nКаждый параметр вводится в отдельной строке в одном сообщении');
         }
         try {
             const attachment = new Discord.MessageAttachment('../out/diary/' + nout + '.docx');
