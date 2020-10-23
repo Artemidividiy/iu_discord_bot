@@ -72,6 +72,28 @@ client.on('message', msg => {
         console.log('http://95.165.106.101:8080/' + nout + '.png');
         msg.reply(embed.setImage('http://95.165.106.101:8080/' + nout + '.png'));
     }
+    
+    if (msg.content.split("\n")[0] === "diary") {
+        let nout = fs.readdirSync('../out/diary/').length;
+        execstr = 'cd ../dictionary_bmstu && python3.9 -m dictionary_generator ';
+        args = msg.content.split("\n");
+        for(i = 1; i < args.length; i++)
+            execstr += '\'' + args[i] + '\' ';
+        execstr += '/home/pyro/out/diary/' + nout;
+        try {
+            child_process.execSync(execstr);
+        }
+        catch(error) {
+            msg.reply('неверные входные данные');
+        }
+        try {
+            const attachment = new Discord.MessageAttachment('../out/diary/' + nout + '.docx');
+            msg.reply(attachment);
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }
 });
 
 client.on('guildMemberAdd', member =>{
