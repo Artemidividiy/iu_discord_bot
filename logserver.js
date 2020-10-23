@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 
 function log(data) {
     console.log('[' + (new Date(Date.now())).toLocaleDateString() + ' ' + (new Date(Date.now())).toLocaleTimeString() + '] (server) >' + data + '\n');
@@ -44,5 +44,22 @@ app.get('/deploy', function (req, res) {
     });
     res.send('deploy request recieved');
 })
+
+app.get('/physdiary', function(req, res) {
+    log('query on physdiary');
+    app.get("/physdiary", (req, res) => {
+        var dts;
+        var args = msg.content.split(" ");
+        const python = spawn("python", ["__main__.py"]);
+        for (let i = 0; i < 9; i++) {python.stdin.write(args[i]);}
+        python.stdout.on("data", (data) => {
+          console.log("we got the result");
+          dts = data;
+        });
+        python.on('close', (code) => {
+          console.log(`child process close all stdio with code ${code}`);
+      });
+      res.send(dts);
+  })
 
 app.listen(80);
